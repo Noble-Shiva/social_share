@@ -6,6 +6,9 @@ module.exports = {
       colors: {
         white: "#fdfdfd",
       },
+      borderRadius: {
+        xl: "1.5rem",
+      },
     },
   },
   variants: {

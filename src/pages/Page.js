@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import Button from "../components/Button";
+import { images } from "../constants";
 import { ThemeContext } from "../context/themeContext";
 
 import illustration from "./../wfh_1.svg";
@@ -8,109 +9,39 @@ const Page = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
 
   return (
-    <div className="h-screen overflow-y-auto dark:bg-gray-900">
-      <div className="text-fuchsia-100 bg-fuchsia-700  dark:bg-gray-800 dark:text-gray-200">
-        <div className="flex items-center justify-between h-16 max-w-6xl px-6 mx-auto">
-          <a className="font-bold tracking-tight uppercase" href="#">
-            Logo
-          </a>
-          <ul
-            className="flex items-center space-x-8 font-semibold"
-            role="navigation"
-          >
-            <li>
-              <a href="#">Contact</a>
-            </li>
-            <li>
-              <button
-                onClick={() => toggleTheme()}
-                className="p-2 rounded focus:outline-none"
-                aria-label="Toggle theme"
-              >
-                {theme === "dark" ? (
-                  <svg
-                    className="w-5 h-5"
-                    aria-label="Apply light theme"
-                    role="image"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
-                      clipRule="evenodd"
-                    ></path>
-                  </svg>
-                ) : (
-                  <svg
-                    className="w-5 h-5"
-                    aria-label="Apply dark theme"
-                    role="image"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
-                  </svg>
-                )}
-              </button>
-            </li>
-            <li>
-              <Button title={"Login"} />
-            </li>
-          </ul>
+    <div className="dark:bg-gray-900">
+      <div className="h-screen flex flex-col-reverse max-w-6xl px-6 py-16 mt-10 mx-auto md:flex-row">
+        <div className="flex flex-col justify-center pr-4 md:w-1/2">
+          <h1 className="text-5xl font-extrabold leading-none tracking-tight text-gray-800 lg:text-6xl dark:text-gray-400">
+            It was never so easy to Network!
+          </h1>
+          <p className="mt-6 mb-12 text-lg text-gray-700 dark:text-gray-400">
+            Share your social handles on the go, with just a{" "}
+            <span className="text-orange-600">Tap!</span>
+          </p>
+          <div>
+            <a
+              className="px-6 py-3 font-semibold text-orange-100 bg-orange-600 rounded-full"
+              href="#read-more"
+            >
+              Read more
+            </a>
+          </div>
+        </div>
+        <div className="md:w-1/2">
+          <img
+            className="w-full"
+            src={images.landing_bg}
+            alt="Woman working from home"
+          />
         </div>
       </div>
-      <header className="">
-        <div className="flex flex-col max-w-6xl px-6 py-16 mx-auto md:flex-row">
-          <div className="flex flex-col justify-center pr-4 md:w-1/2">
-            <div>
-              <a
-                className="inline-flex items-center pl-1 pr-2 mb-3 bg-fuchsia-100 rounded-full dark:bg-gray-800"
-                href="#"
-              >
-                <span className="px-2 py-px mr-2 text-xs font-bold text-fuchsia-100 uppercase bg-fuchsia-700 rounded-full">
-                  New
-                </span>
-                <span className="text-sm leading-loose text-fuchsia-800 dark:text-gray-300">
-                  Visit our new products page →
-                </span>
-              </a>
-            </div>
-            <h1 className="text-5xl font-extrabold leading-none tracking-tight text-gray-800 lg:text-6xl dark:text-gray-400">
-              It was never so easy to create themes
-            </h1>
-            <p className="mt-6 mb-12 text-lg text-gray-700 dark:text-gray-400">
-              You can change this theme even by inspecting the code and applying
-              the className{" "}
-              <code className="px-1 text-purple-500 bg-gray-100 rounded dark:text-purple-200 dark:bg-gray-800">
-                theme-dark
-              </code>{" "}
-              around
-            </p>
-            <div>
-              <a
-                className="px-6 py-2 font-semibold text-orange-100 bg-orange-600 rounded-full"
-                href="#"
-              >
-                Read more
-              </a>
-            </div>
-          </div>
-          <div className="md:w-1/2">
-            <img
-              className="w-full"
-              src={illustration}
-              alt="Woman working from home"
-            />
-          </div>
-        </div>
-      </header>
 
-      <main>
+      <div id="read-more">
         <div className="flex flex-col max-w-6xl px-6 mx-auto mb-16 md:flex-row">
           <div className="grid gap-8 md:grid-cols-3">
             <div className="flex items-center p-4 space-x-4 text-gray-700 rounded-lg shadow-xl dark:bg-gray-800 dark:text-gray-300">
-              <div className="p-2 text-fuchsia-700 bg-fuchsia-100 rounded-full dark:text-fuchsia-100 dark:bg-fuchsia-700">
+              <div className="p-2 rounded-full">
                 <svg
                   className="w-8 h-8"
                   fill="currentColor"
@@ -132,7 +63,7 @@ const Page = () => {
             </div>
             <div className="flex theme-dark">
               <div className="flex items-center w-full p-4 space-x-4 text-gray-700 rounded-lg shadow-xl dark:bg-gray-800 dark:text-gray-300">
-                <div className="p-2 text-fuchsia-700 bg-fuchsia-100 rounded-full dark:text-fuchsia-100 dark:bg-fuchsia-700">
+                <div className="p-2 rounded-full">
                   <svg
                     className="w-8 h-8"
                     fill="currentColor"
@@ -150,7 +81,7 @@ const Page = () => {
               </div>
             </div>
             <div className="flex items-center p-4 space-x-4 text-gray-700 rounded-lg shadow-xl dark:bg-gray-800 dark:text-gray-300">
-              <div className="p-2 text-fuchsia-700 bg-fuchsia-100 rounded-full dark:text-fuchsia-100 dark:bg-fuchsia-700">
+              <div className="p-2 rounded-full">
                 <svg
                   className="w-8 h-8"
                   fill="currentColor"
@@ -178,7 +109,7 @@ const Page = () => {
             </div>
           </div>
         </div>
-      </main>
+      </div>
     </div>
   );
 };

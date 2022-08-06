@@ -12,8 +12,8 @@ const Navbar = () => {
   if (currentLocation === "/signin") return null;
 
   return (
-    <div className="fixed t-0 w-full z-50 bg-white dark:bg-gray-800">
-      <div className="bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200">
+    <div className="fixed t-0 w-full z-50 bg-white dark:bg-gray-900 shadow-lg dark:border-none">
+      <div className="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200">
         <div className="flex items-center justify-between h-16 max-w-6xl px-6 mx-auto">
           <Link
             to="/"
