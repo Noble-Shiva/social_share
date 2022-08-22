@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Footer from "./layouts/Footer";
 import Navbar from "./layouts/Navbar";
 import Landing from "./pages/Landing";
+import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 import Page from "./pages/Page";
 import Page1 from "./pages/Page1";
@@ -17,7 +18,7 @@ const App = () => {
   // const { theme, toggleTheme } = useContext(ThemeContext);
 
   return (
-    <div className="h-screen w-full absolute bg-white">
+    <div className="h-screen w-full absolute bg-white dark:bg-gray-900">
       <Router>
         <Navbar />
         <ScrollToTop />
@@ -27,6 +28,7 @@ const App = () => {
           <Route path="/profile" element={<Profile />} />
           <Route path="/share" element={<ProfileView />} />
           <Route path="/signin" element={<Signin />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/page" element={<Page />} />
           <Route path="/page1" element={<Page1 />} />
           <Route path="/*" element={<NotFound />} />

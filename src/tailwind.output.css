@@ -19024,6 +19024,14 @@ video {
   transition-delay: 1000ms;
 }
 
+.title_underline::after {
+  content: "<div class=" bg-blue-600 mt-3 h-1 w-20 rounded-full "></div>";
+}
+
+.cover_bg {
+  background-image: url(./assets/imgs/bg_1.jpg);
+}
+
 @media (min-width: 640px) {
   .sm\:space-y-0 > :not(template) ~ :not(template) {
     --space-y-reverse: 0;

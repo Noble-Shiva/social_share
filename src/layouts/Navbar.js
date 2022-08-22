@@ -9,7 +9,9 @@ const Navbar = () => {
   const location = useLocation();
   const currentLocation = location.pathname;
 
-  if (currentLocation === "/signin") return null;
+  if (currentLocation === "/signin" || currentLocation === "/login") {
+    return null;
+  }
 
   return (
     <div className="fixed t-0 w-full z-50 bg-white dark:bg-gray-900 shadow-lg dark:border-none">
@@ -67,7 +69,13 @@ const Navbar = () => {
               </button>
             </li>
             <li>
-              <Button title={"Login"} />
+              {/* <Button title={"Login"} /> */}
+              <Link
+                to="/login"
+                className="text-white bg-blue-500 hover:bg-blue-700 border border-transparent m-2 px-4 py-2 font-sm focus:outline-none rounded-full"
+              >
+                Login
+              </Link>
             </li>
           </ul>
         </div>
