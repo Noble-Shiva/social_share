@@ -19029,7 +19029,15 @@ video {
 }
 
 .cover_bg {
-  background-image: url(./assets/imgs/bg_1.jpg);
+  background-image: url(./assets/imgs/cover_bg.jpg);
+}
+
+.profile_bg {
+  background-image: url(./assets/imgs/handle_bg_male_animated.gif);
+}
+
+.ss_card_bg {
+  background-image: url(./assets/imgs/ss_card.png);
 }
 
 @media (min-width: 640px) {

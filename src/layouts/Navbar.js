@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import Button from "../components/Button";
 import { ThemeContext } from "../context/themeContext";
@@ -8,6 +9,8 @@ const Navbar = () => {
 
   const location = useLocation();
   const currentLocation = location.pathname;
+
+  const { user } = useSelector((state) => state.auth);
 
   if (currentLocation === "/signin" || currentLocation === "/login") {
     return null;
@@ -70,12 +73,22 @@ const Navbar = () => {
             </li>
             <li>
               {/* <Button title={"Login"} /> */}
-              <Link
-                to="/login"
-                className="text-white bg-blue-500 hover:bg-blue-700 border border-transparent m-2 px-4 py-2 font-sm focus:outline-none rounded-full"
-              >
-                Login
-              </Link>
+              {user ? (
+                <Link to="/profile">
+                  <img
+                    className="w-10 h-10 bg-cover rounded-full"
+                    src={user?.profilePictureUrl}
+                    alt=""
+                  />
+                </Link>
+              ) : (
+                <Link
+                  to="/login"
+                  className="text-white bg-blue-500 hover:bg-blue-700 border border-transparent m-2 px-4 py-2 font-sm focus:outline-none rounded-full"
+                >
+                  Login
+                </Link>
+              )}
             </li>
           </ul>
         </div>

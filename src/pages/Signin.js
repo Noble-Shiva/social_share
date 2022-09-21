@@ -4,16 +4,26 @@ import { images } from "../constants";
 import Otp from "../components/Otp";
 import { ThemeContext } from "../context/themeContext";
 import { ClassNames } from "../utils/Utils";
-import { Link } from "react-router-dom";
-import { signInWithGoogle } from "../config/firebaseConfig";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  signInWithFacebook,
+  signInWithGoogle,
+  createUser,
+} from "../services/auth";
+import { useDispatch } from "react-redux";
+import { USER_LOADED } from "../actions/types";
 
 const Signin = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
   const [phoneNo, setPhoneNo] = useState();
   const [otp, setOtp] = useState();
   const [email, setEmail] = useState();
+  const [user, setUser] = useState();
   const [currentState, setCurrentState] = useState(0);
   const [errorMsg, setErrorMsg] = useState();
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const onSignin = () => {};
 
@@ -25,9 +35,11 @@ const Signin = () => {
   const googleSignin = async () => {
     console.log("googleSignin");
     const user = await signInWithGoogle();
+    // const user = await signInWithFacebook();
     console.log("User : ", user);
     if (user) {
       setEmail(user.email);
+      setUser(user);
     }
   };
 
@@ -99,9 +111,15 @@ const Signin = () => {
     }
   };
 
-  const signUp = () => {
+  const signUp = async () => {
     console.log("Login");
     if (phoneNo != null && otp != null && email != null) {
+      localStorage.setItem(
+        "user",
+        JSON.stringify({ ...user, phoneNo: phoneNo })
+      );
+      await createUser({ ...user, phoneNo: phoneNo });
+      navigate("/profile");
     } else {
       validateInputs("email");
     }

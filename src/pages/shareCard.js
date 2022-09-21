@@ -1,25 +1,42 @@
 import { PhoneIcon } from "@heroicons/react/solid";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import AddHandle from "../components/AddHandle";
 import Button from "../components/Button";
 import { images } from "../constants";
+import { getUserDetails } from "../services/auth";
+import { getSocialHandles } from "../services/socialHandles";
 
-const Profile = () => {
-  const [show, setShowDialog] = useState(false);
-  const { user } = useSelector((state) => state.auth);
+const ShareCard = () => {
+  const [user, setUser] = useState({});
+  const name = "Shiva";
 
-  console.log("User : ", user);
+  const params = useParams();
+
+  console.log("Route Params : ", params);
+
+  const getUser = async () => {
+    const user = await getUserDetails(params?.id);
+    setUser(user);
+    await getSocialHandles(user.uid);
+  };
+
+  // if (params && params.id) {
+  //   getUser();
+  // }
+
+  useEffect(() => {
+    getUser();
+  }, [params]);
+
   return (
     <>
-      <AddHandle show={show} onDialogClosed={() => setShowDialog(false)} />
       <div className="bg-gray-100 dark:bg-gray-900">
         <div className="max-w-6xl mt-5 md:mt-10 px-6 py-16 mx-auto">
-          <div className="flex flex-col md:flex-row items-stretch">
+          <div className="flex flex-col md:flex-row">
             {/* <div className="mt-10 sm:mt-0 flex flex-col justify-center pr-4"> */}
-            <div className="xl:mr-8">
-              <div className="flex w-full mt-6 lg:mt-8 xl:mr-8">
+            <div className="flex w-full">
+              <div className="flex w-full mt-6 lg:mt-8">
                 <div className="w-full shadow-lg hover:shadow-xl rounded-lg bg-white">
                   <div className="w-full h-48 bg-cover rounded-t-lg cover_bg bg-center"></div>
                   <div className="ml-8 -mt-20">
@@ -36,15 +53,13 @@ const Profile = () => {
                     )}
                   </div>
                   <div className="p-6 -mt-2">
-                    <div className="flex justify-between">
+                    <div className="flex justify-between items-start">
                       <div>
-                        <p className="text-2xl font-bold">{user?.name}</p>
-                        <p className="text-xs text-gray-500">
-                          Senior Software Engineer
-                        </p>
+                        <p className="text-2xl font-bold">{user.name}</p>
+                        <p className="text-xs text-gray-500">{user?.bio}</p>
                       </div>
                       <a
-                        href={`tel:${user?.phoneNo ?? ""}`}
+                        href="tel:+91 9036360233"
                         className="text-white bg-blue-500 hover:bg-blue-700 border border-transparent m-2 px-5 py-2 font-sm focus:outline-none rounded-full"
                       >
                         <span className="flex flex-row justify-center items-center">
@@ -54,52 +69,16 @@ const Profile = () => {
                       </a>
                     </div>
                     <div className="mt-5 text-lg font-bold">
-                      Tips for creating an amazing design system
+                      {user?.bioFull}
                     </div>
                     <div className="mt-2 text-gray-900 text-sm">
-                      Learn how to create a new design system that is beautiful
-                      and efficient for creating your UI components.
+                      {user?.skills}
                     </div>
                   </div>
                 </div>
               </div>
             </div>
             {/* </div> */}
-
-            <div className="flex flex-col space-y-5 items-center mt-6 lg:mt-8">
-              <div className="mb-2 text-lg font-bold text-gray-700 leading-tight">
-                Your Active Cards
-              </div>
-              <div className="flex w-full">
-                <div className="w-full p-8 shadow-lg hover:shadow-xl rounded-lg bg-white">
-                  <div className="flex items-center">
-                    <div className="ss_card_bg w-16 h-16 bg-cover"></div>
-                    <div className="ml-4">
-                      <div className="font-bold text-gray-800">Jeremy Daer</div>
-                      <div className="text-xs text-green-500">Active</div>
-                    </div>
-                  </div>
-                  <div className="mt-5 text-lg font-bold text-gray-700 leading-tight">
-                    1234 XXXX XXXX XXX89
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex w-full">
-                <div className="w-full p-8 shadow-lg hover:shadow-xl rounded-lg bg-white">
-                  <div className="flex items-center">
-                    <div className="ss_card_bg w-16 h-16 bg-cover"></div>
-                    <div className="ml-4">
-                      <div className="font-bold text-gray-800">Jeremy Daer</div>
-                      <div className="text-xs text-green-500">Active</div>
-                    </div>
-                  </div>
-                  <div className="mt-5 text-lg font-bold text-gray-700 leading-tight">
-                    1234 XXXX XXXX XXX89
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
 
           {/* <div className="bg-white rounded-xl shadow-lg border border-gray-200 bg-white">
@@ -137,25 +116,22 @@ const Profile = () => {
               <div className="bg-purple-100 h-40 rounded-b-xl"></div>
             </div> */}
           {/* </div> */}
-          <section className="flex items-center justify-center mt-5 md:mt-16 py-16">
+          <section className="flex items-center justify-center md:mt-16 py-16">
             <div className="mx-auto">
               <div className="flex flex-col items-start justify-between lg:flex-row">
-                <div className="px-2 flex flex-col items-start justify-center w-full h-full pr-8 mb-10 lg:mb-0 lg:w-1/2">
+                <div className="px-2 flex flex-col items-start justify-center w-full h-full pr-8 mb-5 lg:mb-0 lg:w-1/2">
                   {/* <p className="mb-2 text-base font-medium tracking-tight text-indigo-500 uppercase">
                   Our customers love our product
                 </p> */}
                   <h2 className="text-3xl font-extrabold leading-10 text-gray-800 dark:text-gray-400 sm:text-5xl sm:leading-none md:text-3xl lg:text-4xl xl:text-5xl">
-                    Connected Handles!
+                    Social Handles!
                   </h2>
                   <p className="my-6 text-lg text-gray-600">
-                    View all your connected handles here. The more the merrier!
+                    View any handle(s) by just tapping on the card
                   </p>
-                  <button
-                    onClick={() => setShowDialog(!show)}
-                    className="text-white bg-blue-500 hover:bg-blue-700 border border-transparent px-5 py-2 font-sm focus:outline-none rounded-full"
-                  >
+                  {/* <button className="text-white bg-blue-500 hover:bg-blue-700 border border-transparent px-5 py-2 font-sm focus:outline-none rounded-full">
                     Add New Handle
-                  </button>
+                  </button> */}
                 </div>
                 <div className="w-full lg:w-2/3 mt-0">
                   <div className="w-full md:border-4 md:border-dashed md:border-gray-200 md:rounded-lg md:p-5">
@@ -230,4 +206,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default ShareCard;

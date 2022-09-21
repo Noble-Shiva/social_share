@@ -35,7 +35,7 @@ const Landing = () => {
           <h1 className="text-5xl font-extrabold leading-none tracking-tight text-gray-800 lg:text-6xl dark:text-gray-400">
             It was never so easy to Network!
           </h1>
-          <p className="mt-6 mb-12 text-lg text-gray-700 dark:text-gray-400">
+          <p className="mt-6 mb-12 text-lg text-gray-600 dark:text-gray-400">
             Share your social handles on the go, with just a{" "}
             <span className="text-blue-600">Tap!</span>
           </p>
@@ -69,7 +69,7 @@ const Landing = () => {
             <h1 className="pt-5 text-3xl md:text-center font-extrabold leading-none tracking-tight text-gray-800 lg:text-5xl dark:text-gray-400">
               See how it works
             </h1>
-            <span class="bg-blue-600 mt-2 h-1 w-40 rounded-full"></span>
+            <span className="bg-blue-600 mt-2 h-1 w-40 rounded-full"></span>
           </div>
           <div className="flex flex-col md:flex-row mt-10">
             <div className="grid gap-8 md:grid-cols-3">

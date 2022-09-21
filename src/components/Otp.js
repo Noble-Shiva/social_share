@@ -27,8 +27,8 @@ const Otp = ({ otp }) => {
     for (let i = 0; i < inputs.length; i++) {
       inputs[i].addEventListener("keydown", function (event) {
         if (event.key === "Backspace") {
-          if (inputs[i].value == "") {
-            if (i != 0) {
+          if (inputs[i].value === "") {
+            if (i !== 0) {
               inputs[i - 1].focus();
             }
           } else {
@@ -41,7 +41,7 @@ const Otp = ({ otp }) => {
           inputs[i - 1].focus();
         } else if (event.key === "ArrowRight" && i !== inputs.length - 1) {
           inputs[i + 1].focus();
-        } else if (event.key != "ArrowLeft" && event.key != "ArrowRight") {
+        } else if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") {
           inputs[i].setAttribute("type", "text");
           inputs[i].value = ""; // Bug Fix: allow user to change a random otp digit after pressing it
           setTimeout(function () {
